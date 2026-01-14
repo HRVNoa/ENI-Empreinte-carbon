@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Profile} from '../profile/profile';
 import {User} from '../../services/user';
+import {TitleCasePipe} from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import {User} from '../../services/user';
   imports: [
     RouterLink,
     Profile,
+    TitleCasePipe,
   ],
   templateUrl: './header.html',
   styleUrl: './header.css',
