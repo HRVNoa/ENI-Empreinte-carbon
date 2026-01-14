@@ -38,13 +38,14 @@ export class CarbonFootprint implements OnInit, AfterViewInit , OnDestroy{
   public consommationTotal? : number;
 
   voyages: {distanceKm: number, consommationPour100Km: number, quantiteCO2 :number}[] = [
-    { distanceKm: 120, consommationPour100Km: 6.5, quantiteCO2: 18 },
-    { distanceKm: 80, consommationPour100Km: 5.2, quantiteCO2: 10 }
+    // { distanceKm: 120, consommationPour100Km: 6.5, quantiteCO2: 18 },
+    // { distanceKm: 80, consommationPour100Km: 5.2, quantiteCO2: 10 }
   ];
 
   columns: EcoColumn[] = [
     { label: 'Distance', field: 'distanceKm', unit: 'km' },
     { label: 'Consommation', field: 'consommationPour100Km', unit: 'L/100km' },
+    { label: 'Moyen de transport', field: 'moyen' },
     { label: 'CO₂ émis', field: 'quantiteCO2', unit: 'kg' }
   ];
 
@@ -77,15 +78,15 @@ export class CarbonFootprint implements OnInit, AfterViewInit , OnDestroy{
     return this.carbonFootprintComputeService.getVoyages();
   }
 
-  addVoyage(){
-    const distance = Math.floor(Math.random() * 1000);
-    const consommation = Math.floor(Math.random() * 10);
-    const quantiteCO2 = 0;
-
-    this.carbonFootprintComputeService.addVoyages({distanceKm: distance, consommationPour100Km: consommation, quantiteCO2 : quantiteCO2})
-    this.voyages.push({distanceKm: distance, consommationPour100Km: consommation, quantiteCO2 : Number(((distance * consommation) / 100 * 2.3).toFixed(2))})
-    this.calculeFromVoyages();
-  }
+  // addVoyage(){
+  //   const distance = Math.floor(Math.random() * 1000);
+  //   const consommation = Math.floor(Math.random() * 10);
+  //   const quantiteCO2 = 0;
+  //
+  //   this.carbonFootprintComputeService.addVoyages({distanceKm: distance, consommationPour100Km: consommation, quantiteCO2 : quantiteCO2})
+  //   this.voyages.push({distanceKm: distance, consommationPour100Km: consommation, quantiteCO2 : Number(((distance * consommation) / 100 * 2.3).toFixed(2))})
+  //   this.calculeFromVoyages();
+  // }
 
   private calculeFromVoyages() : void {
     const resumeVoyages = this.carbonFootprintComputeService.getResumeVoyages();

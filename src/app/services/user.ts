@@ -5,9 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class User {
 
-  login(username :string) {
-    const user = {name: username};
-    localStorage.setItem("user", JSON.stringify(user))
+  login(username :string, password :string): void {
+    if (password == 'azertyuiop'){
+      const user = {pseudo: username};
+      localStorage.setItem("user", JSON.stringify(user))
+    }
   }
 
   logout() {
@@ -16,7 +18,7 @@ export class User {
 
   getUserName() {
     if (this.isLogged()) {
-      return JSON.parse(localStorage.getItem('user')!).name;
+      return JSON.parse(localStorage.getItem('user')!).pseudo;
     }
   }
 

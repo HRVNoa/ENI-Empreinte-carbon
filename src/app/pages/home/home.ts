@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {EcoButton} from '../../components/template/eco-button/eco-button';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {User} from '../../services/user';
 import {EcoInput} from '../../components/template/eco-input/eco-input';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EcoDivider} from '../../components/template/eco-divider/eco-divider';
 
 @Component({
@@ -12,21 +12,33 @@ import {EcoDivider} from '../../components/template/eco-divider/eco-divider';
   imports: [
     EcoButton,
     RouterLink,
-    EcoInput,
     FormsModule,
-    EcoDivider
+    EcoDivider,
+    ReactiveFormsModule
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
 
-  public userName: string = '';
+  public form: FormGroup;
 
-  constructor(private userService :User) {
+  public messageErreur: string = '';
+
+  constructor(private userService :User, private router :Router) {
+    this.form = new FormGroup({
+      pseudo: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+      password: new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]{8,}')]),
+    })
   }
 
-  login(username :string): void {
-    this.userService.login(username);
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.messageErreur = '';
+      this.userService.login(this.form.value.pseudo, this.form.value.password);
+      this.router.navigate(['/footprint']);
+    } else {
+      this.messageErreur = 'Identifiant invalide';
+    }
   }
 }

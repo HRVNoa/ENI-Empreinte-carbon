@@ -5,23 +5,33 @@ import {Injectable} from '@angular/core';
 })
 export class CarbonFootprintCompute {
 
-  public voyages : {distanceKm: number, consommationPour100Km: number, quantiteCO2: number}[];
+  public voyages : {distanceKm: number, consommationPour100Km: number, moyen :string, quantiteCO2: number}[];
 
   constructor() {
     this.voyages = [];
-    this.voyages?.push({ distanceKm: 50, consommationPour100Km: 5, quantiteCO2 : (50 * 5) / 100 * 2.3 });
-    this.voyages?.push({ distanceKm: 150, consommationPour100Km: 6, quantiteCO2 : (150 * 6) / 100 * 2.3 });
-    this.voyages?.push({ distanceKm: 250, consommationPour100Km: 7, quantiteCO2 : (250 * 7) / 100 * 2.3 });
-    this.voyages?.push({ distanceKm: 350, consommationPour100Km: 8, quantiteCO2 : (350 * 8) / 100 * 2.3 });
-    this.voyages?.push({ distanceKm: 450, consommationPour100Km: 9, quantiteCO2 : (450 * 9) / 100 * 2.3 });
+    // this.voyages?.push({ distanceKm: 50, consommationPour100Km: 5, quantiteCO2 : (50 * 5) / 100 * 2.3 });
+    // this.voyages?.push({ distanceKm: 150, consommationPour100Km: 6, quantiteCO2 : (150 * 6) / 100 * 2.3 });
+    // this.voyages?.push({ distanceKm: 250, consommationPour100Km: 7, quantiteCO2 : (250 * 7) / 100 * 2.3 });
+    // this.voyages?.push({ distanceKm: 350, consommationPour100Km: 8, quantiteCO2 : (350 * 8) / 100 * 2.3 });
+    // this.voyages?.push({ distanceKm: 450, consommationPour100Km: 9, quantiteCO2 : (450 * 9) / 100 * 2.3 });
   }
 
-  getVoyages(): {distanceKm: number, consommationPour100Km: number, quantiteCO2 : number}[] {
+  getVoyages(): {distanceKm: number, consommationPour100Km: number, moyen :string, quantiteCO2 : number}[] {
     return this.voyages;
   }
 
-  addVoyages(voyage: {distanceKm: number, consommationPour100Km: number, quantiteCO2: number }) {
-    voyage.quantiteCO2 = Number(((voyage.distanceKm * voyage.consommationPour100Km) / 100 * 2.3).toFixed(2));
+  addVoyages(voyage: {distanceKm: number, consommationPour100Km: number, moyen :string, quantiteCO2: number }) {
+    switch (voyage.moyen) {
+      case "Voiture":
+        voyage.quantiteCO2 = Number(((voyage.distanceKm * voyage.consommationPour100Km) / 100 * 2.3).toFixed(2));
+        break;
+      case "Train":
+        voyage.quantiteCO2 = Number((voyage.distanceKm * 0.03).toFixed(2));
+        break;
+      case "Avion":
+        voyage.quantiteCO2 = Number((voyage.distanceKm * 0.2).toFixed(2));
+        break;
+    }
     this.voyages.push(voyage);
   }
 

@@ -20,15 +20,20 @@
 
   <app-eco-divider [visible]="false"/>
 
-  <app-eco-button type="primary" label="Générer voyage" (click)="addVoyage()"></app-eco-button>
+  <app-carbon-footprint-form/>
+  <app-carbon-footprint-result/>
 
   <app-eco-divider [visible]="true"/>
+
+<!--  <app-eco-button type="primary" label="Générer voyage" (click)="addVoyage()"></app-eco-button>-->
+
+  <app-eco-divider [visible]="false"/>
 
   <app-eco-card>
     <h2>Liste des voyages</h2>
     <app-eco-table
       [columns]="columns"
-      [rows]="voyages">
+      [rows]="getVoyages()">
     </app-eco-table>
 <!--    <table>-->
 <!--      <thead>-->
@@ -55,7 +60,4 @@
   <app-eco-carbon-indicator [value]="consommationTotal!"/>
 
   <app-eco-divider [visible]="false"/>
-
-  <app-carbon-footprint-form/>
-  <app-carbon-footprint-result/>
 </main>

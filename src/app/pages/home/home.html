@@ -1,8 +1,27 @@
 <main>
-  <div style="display:flex; justify-content: center; align-items: center; flex-direction: column">
-    Username
-    <input [(ngModel)]="userName"/>
+  <form style="display:flex; justify-content: center; align-items: center; flex-direction: column" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label for="pseudo">Pseudo</label>
+    <input type="text" name="pseudo" id="pseudo" formControlName="pseudo"/>
+    @if (form.get('pseudo')?.touched || form.get('pseudo')?.dirty){
+      @if (form.get('pseudo')?.hasError('required')) {
+        <p class="error">Le champ est obligatoire</p>
+      }
+    }
+
+    <label for="password">Mot de passe</label>
+    <input type="password" name="password" id="password" formControlName="password"/>
+    @if (form.get('password')?.touched || form.get('password')?.dirty){
+      @if (form.get('password')?.hasError('required')) {
+        <p class="error">Le champ est obligatoire</p>
+      }
+      @if (form.get('password')?.hasError('pattern')) {
+        <p class="error">Le mot de passe doit faire au moins 8 caractères</p>
+      }
+    }
+
     <app-eco-divider/>
-    <app-eco-button type="primary" label="Allez sur le calculateur" routerLink="/footprint" (click)="login(userName!)"/>
-  </div>
+    <app-eco-button type="primary" label="Allez sur le calculateur"/>
+
+  </form>
 </main>

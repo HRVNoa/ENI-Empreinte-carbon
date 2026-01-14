@@ -1,1 +1,47 @@
-<p>carbon-footprint-form works!</p>
+<app-eco-card>
+  <form class="fcc" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label for="distance">Distance</label>
+    <input type="text" name="distance" id="distance" formControlName="distance"/>
+    @if (form.get('distance')?.touched || form.get('distance')?.dirty){
+      @if (form.get('distance')?.hasError('required')) {
+        <p class="error">Le champ est obligatoire</p>
+      }
+      @if (form.get('distance')?.hasError('min')) {
+        <p class="error">Le champ doit être > 1</p>
+      }
+      @if (form.get('distance')?.hasError('max')) {
+        <p class="error">Le champ doit être < 9 999 999</p>
+      }
+    }
+
+    <label for="consomation100">Consomation aux 100</label>
+    <input type="text" name="consomation100" id="consomation100" formControlName="consomation100"/>
+    @if (form.get('consomation100')?.touched || form.get('consomation100')?.dirty){
+      @if (form.get('consomation100')?.hasError('required')) {
+        <p class="error">Le champ est obligatoire</p>
+      }
+      @if (form.get('consomation100')?.hasError('min')) {
+        <p class="error">Le champ doit être > 1</p>
+      }
+      @if (form.get('consomation100')?.hasError('max')) {
+        <p class="error">Le champ doit être < 9 999 999</p>
+      }
+    }
+
+    <label for="moyen">Moyen de transport</label>
+    <select name="moyen" id="moyen" formControlName="moyen">
+      <option value="voiture">Voiture</option>
+      <option value="train">Train</option>
+      <option value="avion">Avion</option>
+    </select>
+    @if (form.get('moyen')?.touched || form.get('moyen')?.dirty){
+      @if (form.get('moyen')?.hasError('required')) {
+        <p class="error">Le champ est obligatoire</p>
+      }
+    }
+
+    <app-eco-button label="Ajouter le voyage" type="primary"/>
+
+  </form>
+</app-eco-card>
