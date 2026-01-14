@@ -1,0 +1,26 @@
+<table>
+  <thead>
+  <tr>
+    @for (col of columns; track $index) {
+      <th>
+        {{ col.label }}
+      </th>
+    }
+  </tr>
+  </thead>
+
+  <tbody>
+    @for (row of rows; track $index) {
+      <tr>
+        @for (col of columns; track $index) {
+          <td>
+            {{ row[col.field] }}
+            @if (col.unit) {
+              <span> {{ col.unit }}</span>
+            }
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,10 @@
+<ul class="navbar-nav ms-auto">
+  <li class="nav-item">
+    <p class="nav-link m-0">{{ username }}</p>
+  </li>
+  @if (username) {
+    <li class="nav-item">
+      <p class="nav-link m-0" (click)="logOut()">Déconnexion</p>
+    </li>
+  }
+</ul>

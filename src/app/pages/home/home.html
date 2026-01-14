@@ -1,0 +1,8 @@
+<main>
+  <div style="display:flex; justify-content: center; align-items: center; flex-direction: column">
+    Username
+    <input [(ngModel)]="userName"/>
+    <app-eco-divider/>
+    <app-eco-button type="primary" label="Allez sur le calculateur" routerLink="/footprint" (click)="login(userName!)"/>
+  </div>
+</main>

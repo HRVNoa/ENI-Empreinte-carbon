@@ -1,0 +1,12 @@
+.hero {
+  /*background: var(--gradient-hero);*/
+  /*color: white;*/
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

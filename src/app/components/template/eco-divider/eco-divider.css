@@ -1,0 +1,10 @@
+hr {
+  border: none;
+  height: 2px;
+  background: none;
+  margin: 16px 0;
+}
+
+hr.visible {
+  background: var(--eco-green);
+}

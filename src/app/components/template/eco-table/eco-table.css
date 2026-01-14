@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--eco-green-light);
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid var(--eco-gray);
+}

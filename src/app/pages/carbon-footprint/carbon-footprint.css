@@ -1,0 +1,13 @@
+app-carbon-footprint {
+  min-height: 500px;
+}
+
+.haute-distance {
+  color: green;
+  font-weight: bold;
+}
+
+.basse-distance {
+  font-weight: bold;
+  color: red;
+}

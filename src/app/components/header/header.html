@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+<!--      <img src="favicon.ico" alt="Logo" width="32" height="32" class="me-2">-->
+      <span class="fw-bold">🌍 Empreinte Carbone</span>
+    </a>
+
+    <!-- Bouton responsive -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#ecoNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="ecoNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/">
+            Home
+          </a>
+        </li>
+        <app-profile [username]="getUsername()"/>
+      </ul>
+    </div>
+
+
+  </div>
+</nav>
+
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>Calculateur d'Empreinte Carbone</h1>
+    <h3>Bonjour {{ nomUtilisateur }}, évaluez votre impact environnemental et découvrez comment réduire vos émissions de CO₂</h3>
+  </div>
+</header>

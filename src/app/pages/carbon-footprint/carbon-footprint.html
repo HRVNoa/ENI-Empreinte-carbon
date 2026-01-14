@@ -1,0 +1,61 @@
+<main>
+  <app-eco-card>
+    <p [ngClass]="{'haute-distance' : distanceKm! > 500, 'basse-distance' : distanceKm! < 100}">
+      Distance (Km) : {{ distanceKm }}
+      <app-eco-button type="secondary" label="+100" (click)="add100()"></app-eco-button>
+    </p>
+    <p>Consomation total : {{consommationTotal}}</p>
+    <p>
+      Consomation (100km) : <span [ngClass]="{'red' : consommationPour100Km! >= MAX_CONSO, 'green' : consommationPour100Km! < MIN_CONSO}">{{ consommationPour100Km }}</span>
+      @if (consommationPour100Km! > MAX_CONSO) {
+        <br>
+        <app-eco-alert type="danger">Attention, votre consommation est élevée</app-eco-alert>
+      }
+      @if (consommationPour100Km! < MIN_CONSO) {
+        <br>
+        <app-eco-alert type="success">Félicitations, votre consommation est faible</app-eco-alert>
+      }
+    </p>
+  </app-eco-card>
+
+  <app-eco-divider [visible]="false"/>
+
+  <app-eco-button type="primary" label="Générer voyage" (click)="addVoyage()"></app-eco-button>
+
+  <app-eco-divider [visible]="true"/>
+
+  <app-eco-card>
+    <h2>Liste des voyages</h2>
+    <app-eco-table
+      [columns]="columns"
+      [rows]="voyages">
+    </app-eco-table>
+<!--    <table>-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>Distance</th>-->
+<!--        <th>Consommation pour 100 kms</th>-->
+<!--        <th>Kg CO2</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--        @for (voyage of getVoyages(); track $index) {-->
+<!--          <tr>-->
+<!--            <td>{{ voyage.distanceKm }} km</td>-->
+<!--            <td>{{ voyage.consommationPour100Km }} L</td>-->
+<!--            <td>{{ voyage.quantiteCO2 }} kg CO2</td>-->
+<!--          </tr>-->
+<!--        }-->
+<!--      </tbody>-->
+<!--    </table>-->
+  </app-eco-card>
+
+  <app-eco-divider [visible]="false"/>
+
+  <app-eco-carbon-indicator [value]="consommationTotal!"/>
+
+  <app-eco-divider [visible]="false"/>
+
+  <app-carbon-footprint-form/>
+  <app-carbon-footprint-result/>
+</main>
