@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EcoInput} from '../template/eco-input/eco-input';
 import {EcoCard} from '../template/eco-card/eco-card';
 import {EcoButton} from '../template/eco-button/eco-button';
@@ -31,16 +31,33 @@ export class CarbonFootprintForm {
     this.form = new FormGroup({
       distance: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(9999999)]),
       consomation100: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(9999999)]),
-      moyen: new FormControl("voiture", [Validators.required, Validators.pattern(/('Voiture'|'Train'|'Avion')/)]),
+      moyen: new FormControl("voiture", [
+        Validators.required,
+        Validators.pattern(/(voiture|train|avion)/),
+        (control) => this.moyenValidator(control)
+      ]),
     })
   }
 
   onSubmit(): void {
+    console.log(this.form.value, this.form.valid)
     if (this.form.valid) {
       let moyen = this.form.value.moyen;
       moyen = moyen[0].toUpperCase() + moyen.slice(1);
 
-      this.carbonFootprintService.addVoyages({ distanceKm: this.form.value.distance, consommationPour100Km: this.form.value.consomation100, moyen: moyen, quantiteCO2: 0 })
+      this.carbonFootprintService.addVoyages({ distanceKm: this.form.value.distance, consommationPour100Km: this.form.value.consomation100, moyen: moyen, quantiteCO2: 0 });
     }
   }
+
+  moyenValidator(control: AbstractControl){
+    const moyen = control.value;
+    if (moyen == 'voiture') {
+      this.form.get('consomation100')?.setValidators([Validators.required, Validators.min(1), Validators.max(9999999)]);
+    }else{
+      this.form.get('consomation100')?.setValidators([]);
+    }
+    this.form.get('consomation100')?.updateValueAndValidity();
+    return null;
+  }
+
 }

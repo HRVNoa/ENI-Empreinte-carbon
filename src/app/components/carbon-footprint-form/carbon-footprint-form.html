@@ -15,20 +15,6 @@
       }
     }
 
-    <label for="consomation100">Consomation aux 100</label>
-    <input type="text" name="consomation100" id="consomation100" formControlName="consomation100"/>
-    @if (form.get('consomation100')?.touched || form.get('consomation100')?.dirty){
-      @if (form.get('consomation100')?.hasError('required')) {
-        <p class="error">Le champ est obligatoire</p>
-      }
-      @if (form.get('consomation100')?.hasError('min')) {
-        <p class="error">Le champ doit être > 1</p>
-      }
-      @if (form.get('consomation100')?.hasError('max')) {
-        <p class="error">Le champ doit être < 9 999 999</p>
-      }
-    }
-
     <label for="moyen">Moyen de transport</label>
     <select name="moyen" id="moyen" formControlName="moyen">
       <option value="voiture">Voiture</option>
@@ -40,6 +26,23 @@
         <p class="error">Le champ est obligatoire</p>
       }
     }
+
+    @if (form.get('moyen')?.value == 'voiture'){
+      <label for="consomation100">Consomation aux 100</label>
+      <input type="text" name="consomation100" id="consomation100" formControlName="consomation100"/>
+      @if (form.get('consomation100')?.touched || form.get('consomation100')?.dirty){
+        @if (form.get('consomation100')?.hasError('required')) {
+          <p class="error">Le champ est obligatoire</p>
+        }
+        @if (form.get('consomation100')?.hasError('min')) {
+          <p class="error">Le champ doit être > 1</p>
+        }
+        @if (form.get('consomation100')?.hasError('max')) {
+          <p class="error">Le champ doit être < 9 999 999</p>
+        }
+      }
+    }
+
 
     <app-eco-button label="Ajouter le voyage" type="primary"/>
 
